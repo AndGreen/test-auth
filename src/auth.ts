@@ -24,8 +24,6 @@ export const auth = betterAuth({
 			account,
 		},
 	}),
-	basePath: "/api",
-	// baseURL: "http://localhost:3000",
 	trustedOrigins: ["http://localhost:3001"],
 	emailAndPassword: {
 		enabled: true,

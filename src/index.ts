@@ -25,7 +25,7 @@ const app = new Elysia()
 			},
 		}),
 	)
-	.mount("/auth", authHandler)
+	.mount(authHandler)
 	.get("/users", async () => {
 		const users = await db.select().from(user);
 		return users;
