@@ -1,7 +1,8 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI } from "better-auth/plugins";
-import { db } from "./db";
+import { db, user } from "./db";
+import { account, session, verification } from "./schema";
 
 // Placeholder email sender
 async function sendEmail({
@@ -16,7 +17,16 @@ async function sendEmail({
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
 		provider: "pg",
+		schema: {
+			user,
+			session,
+			verification,
+			account,
+		},
 	}),
+	basePath: "/api",
+	// baseURL: "http://localhost:3000",
+	trustedOrigins: ["http://localhost:3001"],
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
